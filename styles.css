@@ -1,0 +1,8 @@
+body { font-family: Segoe UI, sans-serif; padding: 12px; color: #1f2937; }
+.actions { display: grid; gap: 10px; }
+button { border: 0; border-radius: 6px; padding: 11px 14px; color: white; background: #0f6cbd; font-weight: 600; cursor: pointer; }
+button:hover { background: #115ea3; }
+button.alt { background: #5c2d91; }
+button.alt:hover { background: #4a2375; }
+button:disabled { opacity: 0.6; cursor: wait; }
+#message { margin-top: 12px; padding: 9px; min-height: 20px; border-left: 4px solid #0f6cbd; background: #f3f6f9; white-space: pre-wrap; }

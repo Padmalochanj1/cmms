@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CMMS</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    body { font-family: Segoe UI, sans-serif; margin: 0; padding: 16px; text-align: center; color: #1f2937; }
+    #icon { font-size: 40px; line-height: 1; margin-bottom: 6px; }
+    h2 { margin: 4px 0 8px; font-size: 18px; }
+    p { margin: 0 0 14px; font-size: 14px; white-space: pre-wrap; }
+    button { border: 0; border-radius: 6px; padding: 8px 28px; color: white; font-weight: 600; cursor: pointer; background: #0f6cbd; }
+    body.ok #icon, body.ok h2 { color: #107c10; }
+    body.warn #icon, body.warn h2 { color: #b45309; }
+    body.err #icon, body.err h2 { color: #c50f1f; }
+  </style>
+</head>
+<body>
+  <div id="icon"></div>
+  <h2 id="title"></h2>
+  <p id="text"></p>
+  <button id="ok">OK</button>
+  <script>
+    Office.onReady(() => {
+      const q = new URLSearchParams(location.search);
+      const type = q.get("type") || "ok";
+      const map = {
+        ok:   { icon: "\u2714", title: "Saved successfully" },
+        warn: { icon: "\u26A0", title: "Nothing was saved" },
+        err:  { icon: "\u2716", title: "Save failed" }
+      };
+      document.body.className = type;
+      document.getElementById("icon").textContent = map[type].icon;
+      document.getElementById("title").textContent = map[type].title;
+      document.getElementById("text").textContent = q.get("msg") || "";
+      const close = () => Office.context.ui.messageParent("close");
+      document.getElementById("ok").onclick = close;
+      setTimeout(close, 8000);
+    });
+  </script>
+</body>
+</html>
